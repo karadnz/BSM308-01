@@ -1,11 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "fields.h"
+#include "fields.h" //provided by the assigment
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h> //ftruncate
+#include <unistd.h> //for ftruncate
 
 //macros
 
@@ -22,12 +23,16 @@
 
 
 //commands
-int	command(char *cmd, char *str, FILE *fd, IS is);
+int	command(char *cmd, FILE *fd, IS is);
 
 int	yaz(FILE *out_file, IS is);
 int	sil(FILE *out_file, IS is);
 int	sonagit(FILE *out_file, IS is);
 int	dur(FILE *out_file, IS is);
+
+//command utils
+char get_char(char *str);
+char *get_deleted(FILE *out_file, char to_del, int len, int left_most);
 
 //utils
 void ft_err(char *str);

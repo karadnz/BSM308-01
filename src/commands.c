@@ -1,10 +1,9 @@
-
 #include "main.h"
 
-int command(char *cmd, char *str, FILE *out_file, IS is)
+int command(char *cmd, FILE *out_file, IS is) //const cmd maybe
 {
-    char *args = strdup(strchr(str, ':'));
-    printf("cmd: %s \t\targ: %s", cmd, args);
+    //char *args = strdup(strchr(is->text1, ':'));
+    //printf("cmd: %s \t\targ: %s", cmd, args);
 
     if (!strcmp(cmd, YAZ))
 		return yaz(out_file, is);
@@ -21,15 +20,15 @@ int command(char *cmd, char *str, FILE *out_file, IS is)
 
 int yaz(FILE *out_file, IS is)
 {
-	for (int i = 1; i < is->NF; i+=2)
+	//add check for uneven args // possible out of bounds
+	for (int i = 1; i < is->NF; i += 2)
 	{
 		int count = atoi(is->fields[i]);
 
 		for (int j = 0; j < count; j++)
 		{
-			//possible out of bounds
-			//%s couse of \b \t etc.
-			fprintf(out_file,"%s",is->fields[i + 1]);
+			char ch = get_char(is->fields[i + 1]);
+			fprintf(out_file, "%c", ch);
 		}
 		
 	}
@@ -42,52 +41,29 @@ int sil(FILE *out_file, IS is)
 {
 	int del_count = atoi(is->fields[1]); //3
 	int to_del = is->fields[2][0]; //a
-
-	int len = ftell(out_file); //problem on consecutive sil call
-
 	int found = 0;
-	int left_most = len - 1;
+
+	int len = ftell(out_file); //get the len of the file (len of current pos)
+	int left_most = len - 1; //index of the current char
 
 	for (; left_most > 0; left_most--)
 	{
-		if (fseek(out_file, -1, SEEK_CUR) != 0) //make it curr
+		//one char back
+		if (fseek(out_file, -1, SEEK_CUR) != 0)
 			ft_err(ERR_SEEK);
 		
-		int curr = ftell(out_file);
-		char c = getc(out_file);
-		if (c == to_del)
+		if (getc(out_file) == to_del)
 			found++;
 
-		if (fseek(out_file, -1, SEEK_CUR) != 0) //make it curr
+		//one char back cause we moved forward with getc
+		if (fseek(out_file, -1, SEEK_CUR) != 0)
 			ft_err(ERR_SEEK);
 		
 		if (found == del_count)
 			break;
 	}
 
-	//fseek(out_file, 0, SEEK_END);
-	char *buff = (char *)malloc(sizeof(char) * ( len -  left_most + 1));
-	char c;
-
-	buff[len -  left_most] = '\0';
-	while((c = getc(out_file)) != EOF)
-	{
-		if (c == to_del)
-			continue;
-		char ch[2];
-		ch[0] = c;
-		ch[1] = '\0';
-		strcat(buff,ch);
-	}
-
-	//int offset = (len - (left_most));
-	//fseek(out_file, -offset, SEEK_END);
-	//int curr = ftell(out_file);
-	//fprintf(out_file, "%s", buff);
-	
-	//ftruncate(fileno(out_file), len - found);
-	//fseek(out_file, curr, SEEK_SET);
-
+	char *buff = get_deleted(out_file, to_del, len, left_most);
 	
 	// Rewrite the file from the correct position
     fseek(out_file, left_most, SEEK_SET);
@@ -95,8 +71,9 @@ int sil(FILE *out_file, IS is)
 	printf("curr: %d\n", curr);
     fputs(buff, out_file);
     ftruncate(fileno(out_file), ftell(out_file));  // delete the chracters after write
-	fseek(out_file, curr, SEEK_SET);
+	fseek(out_file, curr, SEEK_SET); // nerde kalmasi hakkinda
 
+	free(buff);
 
 	return 0;
 	
@@ -106,8 +83,6 @@ int sil(FILE *out_file, IS is)
 int sonagit(FILE *out_file, IS is)
 {
 	fseek(out_file, 0, SEEK_END);
- 
-    // Printing position of pointer
     //printf("%ld", ftell(out_file));
     return 0;
 }

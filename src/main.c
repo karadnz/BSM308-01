@@ -3,7 +3,7 @@
 
 void ft_err(char *str)
 {
-	return;
+	//return;
 	printf("Hata!: %s", str);
 	exit(1);
 }
@@ -23,6 +23,14 @@ void init(FILE **out_file, IS *is, int argc, char **argv)
 		ft_err(ERR_IN);
 }
 
+void destruct(FILE *out_file, IS is)
+{
+	//check fclose and close if not
+	jettison_inputstruct(is);
+
+	return;
+}
+
 int main(int argc, char **argv)
 {
 	FILE	*out_file;
@@ -31,19 +39,9 @@ int main(int argc, char **argv)
 	init(&out_file, &is, argc, argv);
 
 	while (get_line(is) != -1)
-	{
-		char *line	= strdup(is->text1);
-		char *cmd	= strdup(is->fields[0]);
-
-		//printf("cmd: %s\n", cmd);
-
-		command(cmd, line, out_file, is);
-
-		free(line);
-		free(cmd);
-	}
+		command(is->fields[0], out_file, is);
+	
+	destruct(out_file, is);
 
 	return (0);
 }
-
-// int size = (strchr(line, ':') - line) + 1;
