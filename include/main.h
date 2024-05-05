@@ -10,10 +10,11 @@
 
 //macros
 
-#define ERR_ARGS "Dosya isimi verilmedi!"
+#define ERR_ARGS "Dosya ismi verilmedi!"
 #define ERR_IN "Dosya acma hatasi(giris.dat)"
 #define ERR_OUT "Dosya acma hatasi(cikis.dat)"
 #define ERR_SEEK "fseek hatasi"
+#define ERR_CLOSED "Kapali dosyada islem"
 
 
 #define SIL "sil:"
@@ -21,8 +22,11 @@
 #define SONAGIT "sonagit:"
 #define DUR "dur:"
 
+//globals
+
 
 //commands
+
 int	command(char *cmd, FILE *fd, IS is);
 
 int	yaz(FILE *out_file, IS is);
@@ -30,12 +34,22 @@ int	sil(FILE *out_file, IS is);
 int	sonagit(FILE *out_file, IS is);
 int	dur(FILE *out_file, IS is);
 
+
 //command utils
+
 char get_char(char *str);
 char *get_deleted(FILE *out_file, char to_del, int len, int left_most);
 
+
 //utils
+
 void ft_err(char *str);
+
+void init(FILE **out_file, IS *is, int argc, char **argv);
+void destruct(FILE *out_file, IS is);
+
+char *get_input_file(int argc, char **argv);
+char *get_output_file(int argc, char **argv);
 
 
 #endif

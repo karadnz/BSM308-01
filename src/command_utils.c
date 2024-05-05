@@ -11,8 +11,6 @@ char get_char(char *str)
 		return (' ');
 
 	return (str[0]);
-	
-
 }
 
 

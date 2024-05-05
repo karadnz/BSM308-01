@@ -17,7 +17,8 @@ BIN_DIR	= bin
 
 
 
-SRC =	main.c commands.c command_utils.c
+SRC =	main.c utils.c \
+		commands.c command_utils.c
 
 
 		

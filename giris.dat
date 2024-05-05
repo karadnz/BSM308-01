@@ -1,7 +1,9 @@
-yaz: 7 a 2 b 1 a 2 \b 1 s
+yaz: 7 a 2 b 1 a 2 \b 1 s 3 
 sil: 5 a
 sil: 10 a
-yaz: 1 f
+yaz: 3 f
+sonagit:
+sil: 2 \n
 sonagit:
 yaz: 3 c
 sonagit:

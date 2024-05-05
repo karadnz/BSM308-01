@@ -5,6 +5,9 @@ int command(char *cmd, FILE *out_file, IS is) //const cmd maybe
     //char *args = strdup(strchr(is->text1, ':'));
     //printf("cmd: %s \t\targ: %s", cmd, args);
 
+	if (out_file->_file == -1) //check if closed
+		ft_err(ERR_CLOSED);
+
     if (!strcmp(cmd, YAZ))
 		return yaz(out_file, is);
         
@@ -16,12 +19,14 @@ int command(char *cmd, FILE *out_file, IS is) //const cmd maybe
 
     if (!strcmp(cmd, DUR))
         return dur(out_file, is);
+	
+	return 0;
 }
 
 int yaz(FILE *out_file, IS is)
 {
-	//add check for uneven args // possible out of bounds
-	for (int i = 1; i < is->NF; i += 2)
+	// OUT OF BOUNDS for i
+	for (int i = 1; i + 1 < is->NF; i += 2)
 	{
 		int count = atoi(is->fields[i]);
 
@@ -36,11 +41,10 @@ int yaz(FILE *out_file, IS is)
     return 0;
 }
 
-//fix \n
 int sil(FILE *out_file, IS is)
 {
 	int del_count = atoi(is->fields[1]); //3
-	int to_del = is->fields[2][0]; //a
+	int to_del = get_char(is->fields[2]); //a
 	int found = 0;
 
 	int len = ftell(out_file); //get the len of the file (len of current pos)
@@ -83,12 +87,11 @@ int sil(FILE *out_file, IS is)
 int sonagit(FILE *out_file, IS is)
 {
 	fseek(out_file, 0, SEEK_END);
-    //printf("%ld", ftell(out_file));
     return 0;
 }
 
-int dur(FILE *fd, IS is)
+int dur(FILE *out_file, IS is)
 {
-	fclose(fd); //assumes nothing will be called after
+	fclose(out_file);
     return 0;
 }

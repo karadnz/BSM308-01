@@ -1,35 +1,4 @@
-
 #include "main.h"
-
-void ft_err(char *str)
-{
-	//return;
-	printf("Hata!: %s", str);
-	exit(1);
-}
-
-void init(FILE **out_file, IS *is, int argc, char **argv)
-{
-	char *input_file = "giris.dat";
-	char *output_file = "cikis.dat";
-
-	if (argc != 2)
-		ft_err(ERR_ARGS);
-
-	if ((*out_file = fopen(output_file, "w+")) == NULL)
-		ft_err(ERR_OUT);
-
-	if ((*is = new_inputstruct(input_file)) == NULL) //!
-		ft_err(ERR_IN);
-}
-
-void destruct(FILE *out_file, IS is)
-{
-	//check fclose and close if not
-	jettison_inputstruct(is);
-
-	return;
-}
 
 int main(int argc, char **argv)
 {
