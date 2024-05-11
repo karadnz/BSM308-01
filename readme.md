@@ -31,6 +31,8 @@ aaaaaa kkkkkkk .d.f.d
 
 
 ## stuf
-
+strcat
 ### FILE *
 defined in `stdio.h` 
+
+

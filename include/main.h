@@ -24,6 +24,8 @@
 
 //globals
 
+extern int _i;
+extern char *_buff;
 
 //commands
 
@@ -39,6 +41,14 @@ int	dur(FILE *out_file, IS is);
 
 char get_char(char *str);
 char *get_deleted(FILE *out_file, char to_del, int len, int left_most);
+
+//write utils
+void	ft_putc(char c);
+void	ft_puts(char *str);
+void	ft_truncate();
+char	ft_getc();
+int		ft_tell();
+void	ft_seek(int i, int flag);
 
 
 //utils

@@ -18,7 +18,8 @@ BIN_DIR	= bin
 
 
 SRC =	main.c utils.c \
-		commands.c command_utils.c
+		commands.c command_utils.c \
+		write_utils.c
 
 
 		

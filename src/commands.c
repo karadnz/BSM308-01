@@ -65,7 +65,7 @@ int sil(FILE *out_file, IS is)
 		//one char back cause we moved forward with getc
 		if (fseek(out_file, -1, SEEK_CUR) != 0)
 			ft_err(ERR_SEEK);
-			
+
 		//printf("DEL curr: %d, leftmost: %d char: %c\n", ftell(out_file), left_most, c);
 		if (found == del_count)
 			break;
@@ -74,9 +74,9 @@ int sil(FILE *out_file, IS is)
 		left_most++;
 	char *buff = get_deleted(out_file, to_del, len, left_most);
 	
-	// fseek(out_file, 0, SEEK_SET);
-	// char c = getc(out_file); 
-	// printf("END curr: %d, leftmost: %d char: %c\n", ftell(out_file), left_most, c);
+	fseek(out_file, 0, SEEK_SET);
+	char c = getc(out_file); 
+	printf("END curr: %d, leftmost: %d char: %c\n", ftell(out_file), left_most, c);
 
 	// Rewrite the file from the correct position
     fseek(out_file, left_most, SEEK_SET);
