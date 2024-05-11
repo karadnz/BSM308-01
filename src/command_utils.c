@@ -24,6 +24,8 @@ char *get_deleted(FILE *out_file,char to_del, int len, int left_most)
 	int		i = 0;
 	char	c;
 
+	//fseek(out_file, left_most, SEEK_SET); //in index 0 but why no err on others
+
 	while((c = getc(out_file)) != EOF)
 	{
 		if (c == to_del)

@@ -33,7 +33,10 @@ int yaz(FILE *out_file, IS is)
 		for (int j = 0; j < count; j++)
 		{
 			char ch = get_char(is->fields[i + 1]);
+			printf("TO WRITE:\t%c will be written on:\t%d\n", ch, ftell(out_file));
 			fprintf(out_file, "%c", ch);
+			//printf("WRITTEN:\t%c is written on:\t%d\n", ch, ftell(out_file));
+			
 		}
 		
 	}
@@ -50,33 +53,39 @@ int sil(FILE *out_file, IS is)
 	int len = ftell(out_file); //get the len of the file (len of current pos)
 	int left_most = len - 1; //index of the current char
 
-	for (; left_most > 0; left_most--)
+	for (; left_most >= 0; left_most--)
 	{
 		//one char back
-		if (fseek(out_file, -1, SEEK_CUR) != 0)
+		if (fseek(out_file, -1, SEEK_CUR) != 0) //it returns -1 if we try to read EOF
 			ft_err(ERR_SEEK);
-		
+ 
 		if (getc(out_file) == to_del)
 			found++;
 
 		//one char back cause we moved forward with getc
 		if (fseek(out_file, -1, SEEK_CUR) != 0)
 			ft_err(ERR_SEEK);
-		
+			
+		//printf("DEL curr: %d, leftmost: %d char: %c\n", ftell(out_file), left_most, c);
 		if (found == del_count)
 			break;
 	}
-
+	if (left_most < 0)
+		left_most++;
 	char *buff = get_deleted(out_file, to_del, len, left_most);
 	
+	// fseek(out_file, 0, SEEK_SET);
+	// char c = getc(out_file); 
+	// printf("END curr: %d, leftmost: %d char: %c\n", ftell(out_file), left_most, c);
+
 	// Rewrite the file from the correct position
     fseek(out_file, left_most, SEEK_SET);
 	int curr = ftell(out_file);
-	printf("curr: %d\n", curr);
+	printf("curr: %d, buff: %s\n", curr, buff);
     fputs(buff, out_file);
     ftruncate(fileno(out_file), ftell(out_file));  // delete the chracters after write
 	fseek(out_file, curr, SEEK_SET); // nerde kalmasi hakkinda
-
+	printf("recurr: %d\n", ftell(out_file));
 	free(buff);
 
 	return 0;

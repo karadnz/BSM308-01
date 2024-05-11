@@ -1,10 +1,5 @@
-yaz: 7 a 2 b 1 a 2 \b 1 s 3 
+yaz: 3 z 3 a 2 b 1 c 3 a
 sil: 5 a
-sil: 10 a
-yaz: 3 f
-sonagit:
-sil: 2 \n
-sonagit:
-yaz: 3 c
+yaz: 2 f
 sonagit:
 dur:
