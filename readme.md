@@ -7,7 +7,7 @@
 
 ## Istenenler
 
-Arguman olarak verilen giris dosyasinda bulunan komutlara gore gerekli islemleri yapip olusan sonucu yine arguman olarak verilen cikis dosyasina yazmak.
+Arguman olarak verilen giris dosyasinda bulunan komutlara gore gerekli islemleri yapip olusan sonucu yine arguman olarak verilen cikis dosyasina yazmak. Verilmeyen dosyalarin yerine varsayilan bir dosya secilir. Kullanicinin verdigi parametreler ve dosya icerigi ne olursa olsun program herhangi bir hata vermemelidir ve memory leak olusmamalidir.
 
 
 
@@ -102,7 +102,7 @@ typedef long long my_fpos;
 
 typedef struct s_myFILE
 {
-	my_fpos	_fpos;  // file offset
+	my_fpos	_fpos;  //file offset
 	char	*_buff; //buffer to store output
 
 } myFILE;
@@ -115,7 +115,7 @@ void	ft_puts(myFILE *file,char *str); //inserts given string into current offset
 void	ft_truncate(myFILE *file, int len); //truncates the file to current offset (stdio truncates to given length)
 char	ft_getc(myFILE *file); //returns a char from current offset and increments the offset
 int	ft_tell(myFILE *file); //returns the current offset
-int	ft_seek(myFILE *file, int offset, int flag); //sets the current offset based on given flag behaves exactly like stdio's fseek()
+int	ft_seek(myFILE *file, int offset, int flag); //sets the current offset based on given flag, behaves exactly like stdio's fseek()
 
 #endif
 ```
