@@ -18,7 +18,7 @@ char get_char(char *str)
 
 //returns the new file after chars deleted
 //assumes numbers are correct
-char *get_deleted(FILE *out_file,char to_del, int len, int left_most)
+char *get_deleted(myFILE *tmp_file,char to_del, int len, int left_most)
 {
 	char	*buff = (char *)malloc(sizeof(char) * ( len -  left_most + 1));
 	int		i = 0;
@@ -26,7 +26,7 @@ char *get_deleted(FILE *out_file,char to_del, int len, int left_most)
 
 	//fseek(out_file, left_most, SEEK_SET); //in index 0 but why no err on others
 
-	while((c = ft_getc()) != EOF)
+	while((c = ft_getc(tmp_file)) != EOF)
 	{
 		if (c == to_del)
 			continue;

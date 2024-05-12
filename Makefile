@@ -1,28 +1,24 @@
-
-
 AR	= ar rcs
 RM	= rm -f
 
-CC				= gcc -g
+CC				= gcc
 CFLAGS_DEBUG	= -I ./include/ -fsanitize=address
-CFLAGS			= -I ./libfdr/include -I ./include/  -L./libfdr/lib -lfdr #no lib prefix and .a suffix 
+CFLAGS			= -I./libfdr/include -I./libmyio/include -I./include/  
 CDEBUG			= -g 
-
-
-
 
 SRC_DIR	= src
 OBJ_DIR	= obj
 BIN_DIR	= bin
 
+MYIO_DIR = libmyio
+LIBFDR_DIR = libfdr
 
+MYIO = ./$(MYIO_DIR)/lib/libmyio.a
+LIBFDR = ./$(LIBFDR_DIR)/lib/libfdr.a
 
 SRC =	main.c utils.c \
 		commands.c command_utils.c \
 		write_utils.c
-
-
-		
 		
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -36,22 +32,22 @@ NAME	= $(BIN_DIR)/$(BIN)
 
 all: $(NAME)
 
-# despite its name -g is default this target adds -fsanitize=adress
-debug: $(OBJ) | $(BIN_DIR)
-	@$(CC) $(CFLAGS_DEBUG) $(OBJ) $(ARC) $(FRMS) -o $(NAME)
-	@echo "server data is compiled."
+debug: $(OBJ) $(MYIO) $(LIBFDR)
+	$(CC) $(CFLAGS_DEBUG) $(OBJ) $(MYIO) $(LIBFDR) $(FRMS) -o $(NAME)
+	@echo "project is compiled in debug mode."
 
-$(NAME): $(OBJ) | $(BIN_DIR)
-	@$(CC) $(CFLAGS) $(OBJ) $(ARC) $(FRMS) -o $(NAME)
-	@echo "server is compiled."
+$(NAME): $(OBJ) $(MYIO) $(LIBFDR)
+	$(CC) $(CFLAGS) $(OBJ) $(MYIO) $(LIBFDR) -o $(NAME)
+	@echo "project is compiled."
 
-$(CLIENT): $(OBJ) | $(BIN_DIR)
-	@$(CC) $(CFLAGS) $(OBJ) $(ARC) $(FRMS) -o $(NAME)
-	@echo "server is compiled."
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c 
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# find better way to debug
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC)  $(CFLAGS) $(CDEBUG) -c $< -o $@
+$(MYIO): 
+	@cd ./$(MYIO_DIR) && $(MAKE)
+
+$(LIBFDR): 
+	@cd ./$(LIBFDR_DIR) && $(MAKE)
 
 client:
 	@gcc ./client.c -o client
@@ -61,6 +57,8 @@ run: all
 	./$(NAME) giris.dat
 
 clean:
+	@cd ./$(LIBFDR_DIR) && $(MAKE) clean
+	@cd ./$(MYIO_DIR) && $(MAKE) clean
 	rm -f $(OBJ)
 	@echo "Cleaned"
 

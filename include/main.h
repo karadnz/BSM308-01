@@ -1,12 +1,13 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "fields.h" //provided by the assigment
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h> //for ftruncate
+
+#include "fields.h" //provided by the assigment
+#include "myio.h" //my implementation of file struct and functions from stdio.h
 
 //macros
 
@@ -29,34 +30,34 @@ extern char *_buff;
 
 //commands
 
-int	command(char *cmd, FILE *fd, IS is);
+int	command(char *cmd, FILE *out_file, IS is, myFILE *tmp_file_file);
 
-int	yaz(FILE *out_file, IS is);
-int	sil(FILE *out_file, IS is);
-int	sonagit(FILE *out_file, IS is);
+int	yaz(myFILE *tmp_file, IS is);
+int	sil(myFILE *tmp_file, IS is);
+int	sonagit(myFILE *tmp_file, IS is);
 int	dur(FILE *out_file, IS is);
 
 
 //command utils
 
 char get_char(char *str);
-char *get_deleted(FILE *out_file, char to_del, int len, int left_most);
+char *get_deleted(myFILE *tmp_file, char to_del, int len, int left_most);
 
-//write utils
-void	ft_putc(char c);
-void	ft_puts(char *str);
-void	ft_truncate();
-char	ft_getc();
-int		ft_tell();
-int		ft_seek(int i, int flag);
+// //write utils
+// void	ft_putc(char c);
+// void	ft_puts(char *str);
+// void	ft_truncate();
+// char	ft_getc();
+// int		ft_tell();
+// int		ft_seek(int i, int flag);
 
 
 //utils
 
 void ft_err(char *str);
 
-void init(FILE **out_file, IS *is, int argc, char **argv);
-void destruct(FILE *out_file, IS is);
+void init(myFILE **tmp_file, FILE **out_file, IS *is, int argc, char **argv);
+void destruct(myFILE *tmp_file, FILE *out_file, IS is);
 
 char *get_input_file(int argc, char **argv);
 char *get_output_file(int argc, char **argv);

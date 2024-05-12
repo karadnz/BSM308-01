@@ -1,4 +1,7 @@
-yaz: 1 z 2 a 3 b 1 c 1 \b
-sil: 1 a
-yaz: 2 x
+yaz: 10 a 1 \b 8 k 4 r 6 u
+sil: 4 a
+sonagit:
+yaz: 3 b 4 c 1 \n
+yaz: 2 s
+sonagit:
 dur:
