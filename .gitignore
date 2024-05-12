@@ -4,3 +4,5 @@ bin/*
 !lib/.keep
 !obj/.keep
 !bin/.keep
+.DS_Store
+.vscode/*
