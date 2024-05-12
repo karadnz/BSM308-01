@@ -54,7 +54,7 @@ client:
 	@echo "client is compiled."
 
 run: all
-	./$(NAME) giris.dat
+	./$(NAME)
 
 clean:
 	@cd ./$(LIBFDR_DIR) && $(MAKE) clean

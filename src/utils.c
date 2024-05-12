@@ -41,7 +41,7 @@ char *get_input_file(int argc, char **argv)
 	
 	printf("Uyari!: giris dosyasi verilmedi \"giris.dat\" kullanilacak\n");
 	printf("Kullanim: ./bin/main \"giris_dosyasi\" \"cikis_dosyasi\"\n");
-	return "giris.dat";
+	return "./files/giris.dat";
 }
 
 char *get_output_file(int argc, char **argv)
@@ -51,7 +51,7 @@ char *get_output_file(int argc, char **argv)
 	
 	printf("Uyari!: cikis dosyasi verilmedi \"cikis.dat\" kullanilacak\n");
 	printf("Kullanim: ./bin/main \"giris_dosyasi\" \"cikis_dosyasi\"\n");
-	return "cikis.dat";
+	return "./files/cikis.dat";
 }
 
 
