@@ -21,7 +21,8 @@ void	ft_putc(char c)
 	strcat(new_buff, before);
 	strcat(new_buff, toAdd);
 	strcat(new_buff, after);
-
+	int i = 0;
+	//printf("buff\t%s, before:\t%s, after:\t%s, new_buff:\t%s\n",_buff, before, after, new_buff);
 	free(after);
 	free(before);
 	free(_buff);
@@ -39,7 +40,7 @@ void ft_puts(char *str)
 
 }
 
-void ft_truncate()
+void ft_truncate() //delete the chracters after write, make it like this
 {
 	_buff[_i + 1] = '\0'; //??
 
@@ -47,8 +48,11 @@ void ft_truncate()
 
 char	ft_getc()
 {
-	return _buff[_i];
-	_i++; //to maintain compatibility
+	if (_i >= strlen(_buff))
+		return EOF;
+	//to maintain compatibility
+	return _buff[_i++];
+ 
 }
 
 int		ft_tell()
@@ -56,7 +60,7 @@ int		ft_tell()
 	return _i;
 }
 
-void	ft_seek(int i, int flag)
+int		ft_seek(int i, int flag)
 {
 
 	switch (flag)
@@ -68,9 +72,12 @@ void	ft_seek(int i, int flag)
 		case SEEK_SET:
 			_i = i;
 			break;
+		case SEEK_END:
+			_i = strlen(_buff);
+			break;
 	
 		default:
 			break;
 	}
-
+	return 0; //CHANGE
 }

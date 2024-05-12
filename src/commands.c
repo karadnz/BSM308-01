@@ -33,8 +33,9 @@ int yaz(FILE *out_file, IS is)
 		for (int j = 0; j < count; j++)
 		{
 			char ch = get_char(is->fields[i + 1]);
-			printf("TO WRITE:\t%c will be written on:\t%d\n", ch, ftell(out_file));
-			fprintf(out_file, "%c", ch);
+			printf("TO WRITE:\t%c will be written on:\t%d\n", ch, ft_tell());
+			//fprintf(out_file, "%c", ch);
+			ft_putc(ch);
 			//printf("WRITTEN:\t%c is written on:\t%d\n", ch, ftell(out_file));
 			
 		}
@@ -50,22 +51,25 @@ int sil(FILE *out_file, IS is)
 	int to_del = get_char(is->fields[2]); //a
 	int found = 0;
 
-	int len = ftell(out_file); //get the len of the file (len of current pos)
+	int len = ft_tell(out_file); //get the len of the file (len of current pos)
 	int left_most = len - 1; //index of the current char
 
 	for (; left_most >= 0; left_most--)
 	{
 		//one char back
-		if (fseek(out_file, -1, SEEK_CUR) != 0) //it returns -1 if we try to read EOF
+		printf("curr: %d\n", ft_tell());
+		if (ft_seek(-1, SEEK_CUR) != 0) //it returns -1 if we try to read EOF
 			ft_err(ERR_SEEK);
- 
-		if (getc(out_file) == to_del)
+
+		printf("curr: %d\n", ft_tell());
+		char c = ft_getc();
+		if (c == to_del)
 			found++;
-
+		
 		//one char back cause we moved forward with getc
-		if (fseek(out_file, -1, SEEK_CUR) != 0)
+		if (ft_seek(-1, SEEK_CUR) != 0)
 			ft_err(ERR_SEEK);
-
+		printf("curr: %d, leftmost: %d char: %c\n", ft_tell(), left_most, c);
 		//printf("DEL curr: %d, leftmost: %d char: %c\n", ftell(out_file), left_most, c);
 		if (found == del_count)
 			break;
@@ -74,18 +78,18 @@ int sil(FILE *out_file, IS is)
 		left_most++;
 	char *buff = get_deleted(out_file, to_del, len, left_most);
 	
-	fseek(out_file, 0, SEEK_SET);
-	char c = getc(out_file); 
-	printf("END curr: %d, leftmost: %d char: %c\n", ftell(out_file), left_most, c);
+	ft_seek(0, SEEK_SET);
+	char c = ft_getc(); 
+	printf("END curr: %d, leftmost: %d char: %c\n", ft_tell(), left_most, c);
 
 	// Rewrite the file from the correct position
-    fseek(out_file, left_most, SEEK_SET);
-	int curr = ftell(out_file);
+    ft_seek(left_most, SEEK_SET);
+	int curr = ft_tell();
 	printf("curr: %d, buff: %s\n", curr, buff);
-    fputs(buff, out_file);
-    ftruncate(fileno(out_file), ftell(out_file));  // delete the chracters after write
-	fseek(out_file, curr, SEEK_SET); // nerde kalmasi hakkinda
-	printf("recurr: %d\n", ftell(out_file));
+    ft_puts(buff);
+    ft_truncate();  // delete the chracters after write //ftell
+	ft_seek(curr, SEEK_SET); // nerde kalmasi hakkinda
+	printf("recurr: %d\n", ft_tell());
 	free(buff);
 
 	return 0;
@@ -95,12 +99,14 @@ int sil(FILE *out_file, IS is)
 
 int sonagit(FILE *out_file, IS is)
 {
-	fseek(out_file, 0, SEEK_END);
+	ft_seek(0, SEEK_END);
     return 0;
 }
 
 int dur(FILE *out_file, IS is)
 {
+	fputs(_buff, out_file);
+	printf("BUFF:\t%s",_buff);
 	fclose(out_file);
     return 0;
 }

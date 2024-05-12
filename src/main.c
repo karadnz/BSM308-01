@@ -5,6 +5,8 @@ int main(int argc, char **argv)
 	FILE	*out_file;
 	IS		is;
 
+	
+
 	init(&out_file, &is, argc, argv);
 
 	while (get_line(is) != -1)

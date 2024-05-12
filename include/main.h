@@ -48,7 +48,7 @@ void	ft_puts(char *str);
 void	ft_truncate();
 char	ft_getc();
 int		ft_tell();
-void	ft_seek(int i, int flag);
+int		ft_seek(int i, int flag);
 
 
 //utils
