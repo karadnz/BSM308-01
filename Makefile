@@ -24,7 +24,7 @@ SRC =	main.c utils.c \
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 
-BIN		= main
+BIN		= main.out
 NAME	= $(BIN_DIR)/$(BIN)
 
 

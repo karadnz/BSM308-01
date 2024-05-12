@@ -1,6 +1,6 @@
 lib/*
-obj/*
-bin/*
+obj/*.o
+bin/*.out
 !lib/.keep
 !obj/.keep
 !bin/.keep
