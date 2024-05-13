@@ -42,7 +42,7 @@ char *get_input_file(int argc, char **argv)
 		return (argv[1]);
 	
 	printf("Uyari!: giris dosyasi verilmedi \"./files/giris.dat\" kullanilacak\n");
-	printf("Kullanim: ./bin/main \"giris_dosyasi\" \"cikis_dosyasi\"\n");
+	printf("Kullanim: ./bin/main.out \"giris_dosyasi\" \"cikis_dosyasi\"\n");
 	return "./files/giris.dat";
 }
 
@@ -52,7 +52,7 @@ char *get_output_file(int argc, char **argv)
 		return (argv[2]);
 	
 	printf("Uyari!: cikis dosyasi verilmedi \"./files/cikis.dat\" kullanilacak\n");
-	printf("Kullanim: ./bin/main \"giris_dosyasi\" \"cikis_dosyasi\"\n");
+	printf("Kullanim: ./bin/main.out \"giris_dosyasi\" \"cikis_dosyasi\"\n");
 	return "./files/cikis.dat";
 }
 
