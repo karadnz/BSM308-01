@@ -1,6 +1,6 @@
-## Sistem Porgramlama Proje Odevi
+## Sistem Porgramlama Odevi
 
-2023 - 2024 Bahar Donemi Sistem Programlama Proje Odevi
+2023 - 2024 Bahar Donemi Sistem Programlama Odevi
 ### Hazirlayan
 - Mustafa Karadeniz G211210066 2\A
 
