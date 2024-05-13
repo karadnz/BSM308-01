@@ -90,7 +90,7 @@ void ft_truncate(myFILE *file, int len)
 
 }
 
-char ft_getc(myFILE *file)
+int ft_getc(myFILE *file) //return is int because of EOF(char return type handled diffrently in Apple Clang, from gcc or Linux Clang)
 {
 	if (file->_fpos >= strlen(file->_buff))
 		return EOF;

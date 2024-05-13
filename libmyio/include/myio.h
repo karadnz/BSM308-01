@@ -36,7 +36,7 @@ void	ft_close(myFILE *file);
 void	ft_putc(myFILE *file, char c);
 void	ft_puts(myFILE *file,char *str);
 void	ft_truncate(myFILE *file, int len);
-char	ft_getc(myFILE *file);
+int		ft_getc(myFILE *file);
 int		ft_tell(myFILE *file);
 int		ft_seek(myFILE *file, int offset, int flag);
 
