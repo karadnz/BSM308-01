@@ -2,7 +2,7 @@
 
 int command(char *cmd, FILE *out_file, IS is, myFILE *tmp_file) //return is unused
 {
-	if (out_file->_file == -1) //check if closed
+	if (fileno(out_file) == -1) //check if closed //fd is _file on darwin and _fileno in gnu
 		ft_err(ERR_CLOSED);
 
     if (!strcmp(cmd, YAZ))

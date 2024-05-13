@@ -24,7 +24,7 @@ void init(myFILE **tmp, FILE **out_file, IS *is, int argc, char **argv)
 
 void destruct(myFILE *tmp, FILE *out_file, IS is)
 {
-	if (out_file->_file != -1)//check if closed
+	if (fileno(out_file) != -1)//check if closed
 	{
 		fputs(tmp->_buff, out_file);
 		printf("Dosya basariyla yazdirildi!\n");
