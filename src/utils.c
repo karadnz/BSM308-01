@@ -24,10 +24,12 @@ void init(myFILE **tmp, FILE **out_file, IS *is, int argc, char **argv)
 
 void destruct(myFILE *tmp, FILE *out_file, IS is)
 {
-	fputs(tmp->_buff, out_file);
-	printf("Dosya basariyla yazdirildi!\n");
-	if (out_file->_file != -1) //check if closed
-		fclose(out_file);;
+	if (out_file->_file != -1)//check if closed
+	{
+		fputs(tmp->_buff, out_file);
+		printf("Dosya basariyla yazdirildi!\n");
+		fclose(out_file);
+	} 
 	jettison_inputstruct(is);
 	ft_close(tmp);
 	return;
@@ -39,7 +41,7 @@ char *get_input_file(int argc, char **argv)
 	if (argc > 1)
 		return (argv[1]);
 	
-	printf("Uyari!: giris dosyasi verilmedi \"giris.dat\" kullanilacak\n");
+	printf("Uyari!: giris dosyasi verilmedi \"./files/giris.dat\" kullanilacak\n");
 	printf("Kullanim: ./bin/main \"giris_dosyasi\" \"cikis_dosyasi\"\n");
 	return "./files/giris.dat";
 }
@@ -49,7 +51,7 @@ char *get_output_file(int argc, char **argv)
 	if (argc > 2)
 		return (argv[2]);
 	
-	printf("Uyari!: cikis dosyasi verilmedi \"cikis.dat\" kullanilacak\n");
+	printf("Uyari!: cikis dosyasi verilmedi \"./files/cikis.dat\" kullanilacak\n");
 	printf("Kullanim: ./bin/main \"giris_dosyasi\" \"cikis_dosyasi\"\n");
 	return "./files/cikis.dat";
 }

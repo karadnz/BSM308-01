@@ -35,21 +35,13 @@ int	command(char *cmd, FILE *out_file, IS is, myFILE *tmp_file_file);
 int	yaz(myFILE *tmp_file, IS is);
 int	sil(myFILE *tmp_file, IS is);
 int	sonagit(myFILE *tmp_file, IS is);
-int	dur(FILE *out_file, IS is);
+int	dur(myFILE *tmp_file, FILE *out_file, IS is);
 
 
 //command utils
 
 char get_char(char *str);
 char *get_deleted(myFILE *tmp_file, char to_del, int len, int left_most);
-
-// //write utils
-// void	ft_putc(char c);
-// void	ft_puts(char *str);
-// void	ft_truncate();
-// char	ft_getc();
-// int		ft_tell();
-// int		ft_seek(int i, int flag);
 
 
 //utils

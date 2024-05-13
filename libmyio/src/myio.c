@@ -13,6 +13,8 @@ myFILE *ft_open()
 	rt->_buff = (char *)malloc(sizeof(char));
 	rt->_buff[0] = '\0';
 
+	rt->_fpos = 0;
+
 	return rt;
 }
 

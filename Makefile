@@ -2,7 +2,7 @@ AR	= ar rcs
 RM	= rm -f
 
 CC				= gcc
-CFLAGS_DEBUG	= -I ./include/ -fsanitize=address
+CFLAGS_DEBUG	= -g #-fsanitize=address
 CFLAGS			= -I./libfdr/include -I./libmyio/include -I./include/  
 CDEBUG			= -g 
 
@@ -32,8 +32,10 @@ NAME	= $(BIN_DIR)/$(BIN)
 
 all: $(NAME)
 
-debug: $(OBJ) $(MYIO) $(LIBFDR)
-	$(CC) $(CFLAGS_DEBUG) $(OBJ) $(MYIO) $(LIBFDR) $(FRMS) -o $(NAME)
+debug: $(OBJ)
+	@cd ./$(MYIO_DIR) && $(MAKE)
+	@cd ./$(LIBFDR_DIR) && $(MAKE)
+	$(CC) $(CFLAGS) $(CFLAGS_DEBUG) $(OBJ) $(MYIO) $(LIBFDR) -o $(NAME)
 	@echo "project is compiled in debug mode."
 
 $(NAME): $(OBJ) $(MYIO) $(LIBFDR)
