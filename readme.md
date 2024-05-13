@@ -1,9 +1,8 @@
 ## Sistem Porgramlama Proje Odevi
 
 2023 - 2024 Bahar Donemi Sistem Programlama Proje Odevi
-### Hazirlayanlar
+### Hazirlayan
 - Mustafa Karadeniz G211210066 2\A
-- Necmi Erturk B231210501 2\B
 
 ## Istenenler
 
