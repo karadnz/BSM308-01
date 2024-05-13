@@ -1,9 +1,10 @@
-yaz: 3 z 3 a 2 b 1 c 3 a 2 \n
+yaz: 3 z 3 a 2 b 1 c 2 \n 3 a 2 \n
 sil: 15 a
 yaz: 1 x
 yaz: 2 y
 sonagit:
-sil: 2 \n
+sil: 3 \n
+yaz: 1 d
 sonagit:
 yaz: 2 F
 dur:
