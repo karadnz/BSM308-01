@@ -22,7 +22,7 @@ char *get_deleted(myFILE *tmp_file,char to_del, int len, int left_most)
 {
 	char	*buff = (char *)malloc(sizeof(char) * ( len -  left_most + 1));
 	int		i = 0;
-	char	c;
+	int		c; //getc's return type is int
 
 	//fseek(out_file, left_most, SEEK_SET); //in index 0 but why no err on others
 
