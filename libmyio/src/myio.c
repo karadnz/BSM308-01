@@ -29,7 +29,7 @@ void ft_close(myFILE *file)
 //before = aaa
 //after = bc
 //new_buff = aaaXbc 
-void	ft_putc(myFILE *file, char c)
+void	ft_putc2(myFILE *file, char c)
 {
 	char *after = strdup(file->_buff + file->_fpos);
 	file->_buff[file->_fpos] = '\0';
@@ -48,6 +48,27 @@ void	ft_putc(myFILE *file, char c)
 	free(file->_buff);
 	file->_buff = new_buff;
 	file->_fpos++;
+}
+
+void	ft_putc(myFILE *file, char c)
+{
+	int		len = strlen(file->_buff);
+	char	*new_buff = (char *)malloc(sizeof(char) * (len + 2)); //\0 and c
+
+	//before the offset
+	//aaa bcc 3
+	memcpy(new_buff, file->_buff, file->_fpos); //aaa
+
+	new_buff[file->_fpos] = c; //aaac 
+
+	memcpy(new_buff + file->_fpos + 1, file->_buff + file->_fpos, len - file->_fpos); //aaacbcc
+
+	new_buff[len + 1] = '\0';
+
+	free(file->_buff);
+	file->_buff = new_buff;
+	file->_fpos++;
+
 }
 
 //inserts a string into current fpos
