@@ -7,9 +7,11 @@
 
 ## Istenenler
 
-Arguman olarak verilen giris dosyasinda bulunan komutlara gore gerekli islemleri yapip olusan sonucu yine arguman olarak verilen cikis dosyasina yazmak. Verilmeyen dosyalarin yerine varsayilan bir dosya secilir. Kullanicinin verdigi parametreler ve dosya icerigi ne olursa olsun program herhangi bir hata vermemelidir ve memory leak olusmamalidir.
-
-
+- Arguman olarak verilen giris dosyasi acilir, eger yoksa varsayilan bir dosya acilir.
+- Dosyada bulunan komutlara gore gerekli islemler yapilir.
+- Olusan sonuc arguman olarak verilen cikis dosyasina yazilir, eger yoksa varsayilan bir dosyaya yazilir.
+- Kullanicinin verdigi dosyalar ve icerikleri ne olursa olsun program cokmemelidir.
+- Programda memory leak olusmamalidir.
 
 ## Komutlar
 
@@ -113,7 +115,7 @@ void	ft_close(myFILE *file); //destroys an myFILE struct
 void	ft_putc(myFILE *file, char c); //inserts given char into current offset (stdio writes on it instead of inserting)
 void	ft_puts(myFILE *file,char *str); //inserts given string into current offset (stdio writes on it instead of inserting)
 void	ft_truncate(myFILE *file, int len); //truncates the file to current offset (stdio truncates to given length)
-char	ft_getc(myFILE *file); //returns a char from current offset and increments the offset
+int	ft_getc(myFILE *file); //returns a char from current offset and increments the offset
 int	ft_tell(myFILE *file); //returns the current offset
 int	ft_seek(myFILE *file, int offset, int flag); //sets the current offset based on given flag, behaves exactly like stdio's fseek()
 
