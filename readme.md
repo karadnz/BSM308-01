@@ -13,6 +13,11 @@
 - Kullanicinin verdigi dosyalar ve icerikleri ne olursa olsun program cokmemelidir.
 - Programda memory leak olusmamalidir.
 
+## Kullanim
+
+- `make run` varsayilan dosyalarla calistirir
+- `./bin/main.out "path_to_input" "path_to_output"`
+
 ## Komutlar
 
 ### yaz
