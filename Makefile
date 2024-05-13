@@ -18,7 +18,6 @@ LIBFDR = ./$(LIBFDR_DIR)/lib/libfdr.a
 
 SRC =	main.c utils.c \
 		commands.c command_utils.c \
-		write_utils.c
 		
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
